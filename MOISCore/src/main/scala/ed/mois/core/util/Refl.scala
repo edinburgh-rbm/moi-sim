@@ -16,22 +16,6 @@ object Refl {
       a + (f.getName -> f.get(cc))
     }
 
-  def getTinyCCFields(cc: AnyRef) =
-    (Map[String, Any]() /: cc.getClass.getDeclaredFields) { (a, f) =>
-      f.setAccessible(true)
-      if (f.get(cc).isInstanceOf[ed.mois.core.tiny.Field[_]])
-        a + (f.getName -> f.get(cc))
-      else a
-    }
-  
-  def getTinyCCFieldNames(cc: AnyRef) =
-    (Map[Int, String]() /: cc.getClass.getDeclaredFields) { (a, f) =>
-      f.setAccessible(true)
-      if (f.get(cc).isInstanceOf[ed.mois.core.tiny.Field[_]])
-        a + (f.get(cc).asInstanceOf[ed.mois.core.tiny.Field[_]].id -> f.getName)
-      else a
-    }
-
   def getStormCCFields(cc: AnyRef) =
     (Map[String, Any]() /: cc.getClass.getDeclaredFields) { (a, f) =>
       f.setAccessible(true)
