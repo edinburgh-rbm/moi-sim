@@ -1,0 +1,52 @@
+# -*- org -*-
+
+Notes on running the simulations as of 2014-06-11. This is done as in
+the README with 
+
+  sbt
+  > project MOISModels
+  > run
+
+Annoyingly when there is an error, sbt just seems to hang and needs to
+be killed with ^C. This could possibly be fixed with the -batch
+command line parameter to sbt.
+
+Many of the simulations rely on gnuplot, though this is documented in
+README.md it is not documented that running the simulations implies
+plotting the output!
+
+There may be a version mismatch with gnuplot, or the generated .plt
+file is often invalid. For example:
+
+    plot 'gnuplot_74058156.gp' using 1:2 title 'p'  with lines pt 7 ps
+    0.8, 'gnuplot_74058156.gp' using 1:3 title 'c'  with lines pt 7 ps
+    0.8, 'gnuplot_74058156.gp' using 1:4 title 'r'  with lines pt 7 ps
+    0.8, 'gnuplot_74058156.gp' using 1:5 title 'a'  with lines pt 7 ps
+    0.8, 'gnuplot_74058156.gp' using 1:6 title 'g'  with lines pt 7 ps 0.8
+                                                                                                                                                                                                                                                                                                                                       ^
+    "gnuplot_77950336.gp", line 8: warning: No pointtype specifier
+    allowed, here
+
+Furthermore the exit status of gnuplot appears to not be checked so
+the error ends up on stderr but the interpreter thinks that the
+operation has succeeded.
+
+* [1] ed.mois.models.storm.RecycledBrineTankCascadeSimRunner
+  
+* [2] ed.mois.models.storm.SampleSimRunner
+  Requires Matlab, cannot run on gallows.inf at present.
+
+* [3] ed.mois.models.storm.bollenbach.BollenbachSystemRunner
+  Very chatty
+
+* [4] ed.mois.models.storm.karrlike.KarrlikeSimRunner
+
+
+* [5] ed.mois.models.storm.resourceprocessing.ResourceProcessingSystemRunner
+
+
+* [6] ed.mois.models.storm.BrineTankCascadeSimRunner
+
+
+* [7] ed.mois.models.storm.SampleODESimRunner
+
