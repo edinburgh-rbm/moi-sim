@@ -1,2 +1,3 @@
 ScoverageSbtPlugin.instrumentSettings
 
+scalaUnidocSettings
