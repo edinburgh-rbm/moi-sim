@@ -12,10 +12,10 @@ import ScalateKeys._
 
 object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq(
-    organization := "uk.ed.inf",
+    organization := "uk.ac.ed.inf",
     version := "1.0.0",
     scalacOptions ++= Seq(),
-    scalaVersion := "2.10.2",
+    scalaVersion := "2.10.4",
     resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/",
     resolvers += "Sonatype snapshots repository" at "https://oss.sonatype.org/content/repositories/snapshots/"
   )
