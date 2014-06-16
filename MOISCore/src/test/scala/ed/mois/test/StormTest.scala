@@ -11,7 +11,7 @@ import org.scalatest.FlatSpec
 import ed.mois.core.storm._
 
 class StormTest extends FlatSpec {
-  "ChangeHelper" should "Rearrange changes according to time of occurrence" in {
+  "ChangeHelper" should "Split and rearrange changes according to time of occurrence" in {
     val a = StormChange(0, 0.0, 1.0, Map.empty[Int, Any])
     val b = StormChange(1, 0.0, 1.0, Map.empty[Int, Any])
     val c = StormChange(2, 0.2, 0.2, Map.empty[Int, Any])
@@ -47,7 +47,7 @@ class StormTest extends FlatSpec {
     assert(sliced(s4).contains(b))
   }
 
-  "ChangeHelper" should "Integrate changes correctly" in {
+  ignore should "Integrate changes correctly WTFITSTD" in {
     case class St extends StormState[St] {
       var fa = field(50.0) >= 0.0
       var fb = field(50.0) >= 0.0
@@ -55,6 +55,7 @@ class StormTest extends FlatSpec {
     }
     var m = collection.mutable.Map.empty[Double, St]
 
+    println("XXXX")
     val state = St()
     m += (0.0 -> state.dupl)
     println(m)
@@ -75,6 +76,7 @@ class StormTest extends FlatSpec {
     println(s"${state.fa}, ${state.fb}, ${state.fc}")
     println(sliced)
     println(m)
+    println("YYYY")
   }
 }
 
