@@ -66,5 +66,12 @@ container:start
 ```
 You can then browse to 127.0.0.1:8080 and see the interface. Choose a simulation in the top right corner. Once it's loaded, select observables by clicking on corresponding names in the simulation graph and run the simulation by clicking the button in the top right. You will get the curves as output once the simulation is finished. Due to some debugging in development mode of Scalatra, it can take a while as the whole state vector trajectory is printed to the console as well. To avoid this, the application has to be deployed in production mode. 
 
+## Generate API documentation
+To generate documentation, use
+```
+unidoc
+```
+The API documentation will be generated in `target/scale-VERSION/unidoc`. An on-line version is available at <https://gallows.inf.ed.ac.uk/rbm/moi-sim/api>
+
 ## Warnings
 Tested on Windows 8 64 Bit. No warranties for other platforms. Web interface a little clumsy sometimes, can easily be reloaded (F5 in browsers) though.
