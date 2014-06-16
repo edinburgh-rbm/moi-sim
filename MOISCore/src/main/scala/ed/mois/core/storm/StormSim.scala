@@ -14,6 +14,8 @@ import scala.concurrent._
 import scala.concurrent.duration._
 import ExecutionContext.Implicits.global
 
+import org.slf4j.LoggerFactory
+
 import ed.mois.core.storm.strategies._
 import ed.mois.core.util._
 import ed.mois.core.util.plot.s4gnuplot.Gnuplot
@@ -43,7 +45,7 @@ abstract class StormSim {
   /**
    * Tells the simulator if gnu plot should be called in the end to plot observables. 
    */
-  val printGnu = true
+  val printGnu = false
 
   /** 
    * Tells the simulator if data should be written to disk.
@@ -70,8 +72,10 @@ abstract class StormSim {
    * Main function that runs a simulation given the model and strategies.
    */
   def runSim: Future[TreeMap[Double, StormState[_]]] = {
+    val log = LoggerFactory.getLogger(classOf[StormSim])
+
     val initTime = System.currentTimeMillis
-    println(s"""Running simulation '${model.title}'""")
+    log.info(s"""Running simulation '${model.title}'""")
 
     // Create a future holding the simulation results
     val results: Future[TreeMap[Double, StormState[_]]] = {
@@ -84,18 +88,19 @@ abstract class StormSim {
       case endSim => {
         // Statistics
         val time = System.currentTimeMillis - initTime
-        println(s"""Simulation '${model.title}' took ${time.toDouble / 1000} seconds and resulted in ${endSim.size} data vectors of size ${endSim.head._2.fields.size}.""")
+        log.info(s"""Simulation '${model.title}' took ${time.toDouble / 1000} seconds and resulted in ${endSim.size} data vectors of size ${endSim.head._2.fields.size}.""")
 
         // Logging
         if (!endSim.isEmpty && writeData) {
+	  log.info(s"""Writing simulation data to ${fileName}""")
           loggingStrategy.writeStormData(fileName, model, endSim)
         }
-
-        println("Finished logging to disk, starting Gnuplot.")
 
         // Observables
         val observables = model.observables
         if (!observables.isEmpty && printGnu) {
+          log.info("""Plotting data""")
+
           val gnuData = endSim.map(es => Seq(es._1) ++
             observables.map(o => es._2.fields(o.id).asInstanceOf[Double])).toSeq
 
@@ -112,9 +117,14 @@ abstract class StormSim {
           plot.plot
         }
 
+	log.info("""Done. Shutting down Actors.""")
+
         // Shut down system (in case it was even used...)
         system.shutdown
+
+	log.info("""Actors shut down.""")
       }
+
     }
 
     // Return future of results (the caller of the simulator can thus still modify the results further)

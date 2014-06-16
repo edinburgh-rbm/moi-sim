@@ -64,8 +64,8 @@ object MyBuild extends Build {
     settings = buildSettings ++ Seq(
       libraryDependencies ++= Seq(
 	"org.scalatest" % "scalatest_2.10" % "2.0.M5b" % "test",
-	"commons-logging" % "commons-logging" % "1.1.3",
-	"log4j" % "log4j" % "1.2.17")
+	"org.slf4j" % "slf4j-api" % "1.7.7",
+	"org.slf4j" % "slf4j-simple" % "1.7.7")
     )
   ) dependsOn(MOISCore)
   
@@ -81,6 +81,8 @@ object MyBuild extends Build {
 	"com.typesafe.akka" %% "akka-actor" % "2.1.0",
 	// Matrices in Java
 	"com.googlecode.efficient-java-matrix-library" % "ejml" % "0.22",
+	"org.slf4j" % "slf4j-api" % "1.7.7",
+	"org.slf4j" % "slf4j-simple" % "1.7.7",
 	"org.scalatest" % "scalatest_2.10" % "2.0.M5b" % "test",
 	"commons-logging" % "commons-logging" % "1.1.3",
 	"org.apache.commons" % "commons-math" % "2.2",
