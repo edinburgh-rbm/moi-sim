@@ -1,3 +1,0 @@
-ScoverageSbtPlugin.instrumentSettings
-
-scalaUnidocSettings

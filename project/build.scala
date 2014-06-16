@@ -8,6 +8,7 @@ import Keys._
 import org.scalatra.sbt._
 import org.scalatra.sbt.PluginKeys._
 import com.mojolly.scalate.ScalatePlugin._
+//import scoverage.ScoverageSbtPlugin.instrumentSettings
 import ScalateKeys._
 
 object BuildSettings {
@@ -15,10 +16,10 @@ object BuildSettings {
       organization := "uk.ac.ed.inf",
       version := "1.0.0",
       scalacOptions ++= Seq(),
-	scalaVersion := "2.10.4",
+      scalaVersion := "2.10.4",
       resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/",
       resolvers += "Sonatype snapshots repository" at "https://oss.sonatype.org/content/repositories/snapshots/"
-    )
+    ) //++ instrumentSettings
 }
 
 object MyBuild extends Build {
