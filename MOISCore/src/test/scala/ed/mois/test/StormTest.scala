@@ -22,10 +22,29 @@ class StormTest extends FlatSpec {
 
     val sliced = t.slices(chgLst)
 
-    //assert(sliced(0.0).contains(a) && sliced(0.0).contains(b))
-    //assert(sliced(0.2).contains(a) && sliced(0.2).contains(b) && sliced(0.2).contains(c))
-    //assert(sliced(0.3).contains(a) && sliced(0.3).contains(b) && sliced(0.3).contains(c) && sliced(0.3).contains(d))
-    println(t.slices(chgLst))
+    val s0 = (0.0, 0.2)
+    assert(sliced(s0).contains(a))
+    assert(sliced(s0).contains(b))
+
+    val s1 = (0.2, 0.3)
+    assert(sliced(s1).contains(a))
+    assert(sliced(s1).contains(b))
+    assert(sliced(s1).contains(c))
+
+    val s2 = (0.3, 0.4)
+    assert(sliced(s2).contains(a))
+    assert(sliced(s2).contains(b))
+    assert(sliced(s2).contains(c))
+    assert(sliced(s2).contains(d))
+      
+    val s3 = (0.4, 0.8)
+    assert(sliced(s3).contains(a))  
+    assert(sliced(s3).contains(b))  
+    assert(sliced(s3).contains(d))
+
+    val s4 = (0.8, 1.0)
+    assert(sliced(s4).contains(a))
+    assert(sliced(s4).contains(b))
   }
 
   "ChangeHelper" should "Integrate changes correctly" in {
