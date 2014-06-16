@@ -50,13 +50,13 @@ Easiest to get your own model started is to copy and modify one of the example m
 project MOISModels
 run
 ```
-The best documented model is the ResrouceProcessing model. 
+The best documented model is the ResourceProcessing model. 
 
 For a real model (that is independent of this repository), create a new project depending on the simulator. Easiest is probably the compilation and packaging of the MOI Simulator via (in sbt):
 ```
 package
 ```
-This yields a moiscore_2.10-1.0.0.jar file in MOISCore\target\scala-2.10 which can be used as a library in any project. Haven't tested this yet, but sould work :).
+This yields a moiscore_2.10-1.0.0.jar file in MOISCore\target\scala-2.10 which can be used as a library in any project. Haven't tested this yet, but should work :)
 
 ## Use the web interface
 To start the web interface, switch to the corresponding project in sbt and run it there:

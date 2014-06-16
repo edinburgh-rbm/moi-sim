@@ -57,6 +57,5 @@ class StormTest extends FlatSpec {
     println(sliced)
     println(m)
   }
-
-
 }
+
