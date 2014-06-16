@@ -11,4 +11,8 @@
     correctly" mean???? The test does some operations with
     intersectAndStore but the assert statements that are commented out
     are nonsense and I have no idea if the console prints say anything
-    useful.    
+    useful. 
+
+* MatrixTest.scala
+
+  - Why is this written in FORTRAN77???

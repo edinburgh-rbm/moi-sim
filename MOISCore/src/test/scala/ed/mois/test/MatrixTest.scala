@@ -20,9 +20,9 @@ class MatrixTest extends FlatSpec {
     } {
       matr(i, j) = i + j
     }
-    println(matr.toString)
+
     matr.fields = matr.removeRows(List(2, 3))
-    println(matr.toString)
+    assert(matr.toString == "[ [ 0, 1, 2, 3, 4 ], [ 1, 2, 3, 4, 5 ], [ 4, 5, 6, 7, 8 ] ]")
   }
 
   "AnyMatrix" should "remove columns nicely" in {
@@ -33,9 +33,8 @@ class MatrixTest extends FlatSpec {
     } {
       matr(i, j) = i + j
     }
-    println(matr.toString)
     matr.fields = matr.removeCols(List(2, 3))
-    println(matr.toString)
+    assert(matr.toString == "[ [ 0, 1, 4 ], [ 1, 2, 5 ], [ 2, 3, 6 ], [ 3, 4, 7 ], [ 4, 5, 8 ] ]")
   }
 }
 
