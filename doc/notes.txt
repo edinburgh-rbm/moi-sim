@@ -1,0 +1,14 @@
+-*- org -*-
+
+* Stormtest.scala
+
+  - The slices method is neat and breaks up values of the form (t, dt,
+    v) according to the least common time segments. But this means
+    that it copies around v a lot, referenced potentially by lots of
+    new slices. Is it passed by reference or by value? Test.
+
+  - What on earth does   "ChangeHelper" should "Integrate changes
+    correctly" mean???? The test does some operations with
+    intersectAndStore but the assert statements that are commented out
+    are nonsense and I have no idea if the console prints say anything
+    useful.    
