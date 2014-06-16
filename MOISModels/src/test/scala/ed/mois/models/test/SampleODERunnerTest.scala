@@ -11,10 +11,12 @@ import scala.concurrent.Await
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Success, Failure}
-import org.scalatest.FlatSpec
+
 import ed.mois.core.storm.StormSim 
 import ed.mois.core.storm.strategies.IndepTimeScaleStrategy
 import ed.mois.models.storm.SampleODEModel
+
+import org.scalatest._
 
 class SampleODEModelTest extends FlatSpec {
   "Sample ODE Model" should "run" in {
@@ -25,12 +27,13 @@ class SampleODEModelTest extends FlatSpec {
     }
     val results = sim.runSim
     Await.result(results, 60 seconds)
+
     results onComplete {
       case Success(data) => {
 	assert(data.size == 1002)
       }
       case Failure(t) => {
-	assert(0 == 1)
+	throw t // should not happen
       }
     }
   }

@@ -63,7 +63,7 @@ object MyBuild extends Build {
     file("MOISModels"),
     settings = buildSettings ++ Seq(
       libraryDependencies ++= Seq(
-	"org.scalatest" % "scalatest_2.10" % "2.0.M5b" % "test",
+	"org.scalatest" % "scalatest_2.10" % "2.2.0" % "test",
 	"org.slf4j" % "slf4j-api" % "1.7.7",
 	"org.slf4j" % "slf4j-simple" % "1.7.7")
     )
@@ -83,7 +83,7 @@ object MyBuild extends Build {
 	"com.googlecode.efficient-java-matrix-library" % "ejml" % "0.22",
 	"org.slf4j" % "slf4j-api" % "1.7.7",
 	"org.slf4j" % "slf4j-simple" % "1.7.7",
-	"org.scalatest" % "scalatest_2.10" % "2.0.M5b" % "test",
+	"org.scalatest" % "scalatest_2.10" % "2.2.0" % "test",
 	"commons-logging" % "commons-logging" % "1.1.3",
 	"org.apache.commons" % "commons-math" % "2.2",
 	"org.apache.commons" % "commons-lang3" % "3.1",
