@@ -47,46 +47,41 @@ class IMSControlServlet extends IMSControlStack
   val simulators: List[SimulationDescriptor] = List(
     SimulationDescriptor("Brine Tank System", "A classical example of an ODE system.", () => {
       new StormSim {
-        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01) {override val debug = true}
+        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01)
         val model = new BrineTankCascadeModel
         override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 50.0, 0.1) 
-          {override val debug = false}
         override val printGnu = false
       }
     }),
     SimulationDescriptor("Recycled Brine Tank Cascade System", "A classical example of an ODE system, extended with a cascade.", () => {
       new StormSim {
-        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01) {override val debug = true}
+        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01)
         val model = new RecycledBrineTankCascadeModel
         override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 50.0, 0.1) 
-          {override val debug = false}
         override val printGnu = false
       }
     }),
     SimulationDescriptor("Sample ODE System", "A sample ODE system.", () => {
       new StormSim {
-        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01) {override val debug = true}
+        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01)
         val model = new SampleODEModel
         override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 50.0, 0.1) 
-          {override val debug = false}
         override val printGnu = false
       }
     }),
     SimulationDescriptor("Bollenbach System", "The Bollenbach whole cell model.", () => {
       new StormSim {
-        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01) {override val debug = true}
+        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01)
         val model = new bollenbach.BollenbachModel(9769.0)
         override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 50.0, 0.1) 
-          {override val debug = false}
         override val printGnu = false
       }
     }),
     SimulationDescriptor("Resource Processing System", "A resource processing system based on the Bollenbach whole cell model.", () => {
       new StormSim {
-        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01) {override val debug = true}
+        //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01)
         val model = new resourceprocessing.ResourceProcessingModel(9769.0)
         override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 50.0, 0.1) 
-          {override val debug = false}
         override val printGnu = false
       }
     }))

@@ -25,7 +25,8 @@ class IndepTimeScaleStrategy(maxTime: Double, dt: Double) extends SimulationStra
     val pDt = Array.fill(processes.length)(dt)
     // Initialize result map
     var m = collection.mutable.Map.empty[Double, model.StateType]
-    if (debug) println(printStatesHeader(model.stateVector, 6))
+
+    if (logger.isDebugEnabled) logger.debug(printStatesHeader(model.stateVector, 6))
 
     var changes = List.empty[StormChange]
     
@@ -33,7 +34,7 @@ class IndepTimeScaleStrategy(maxTime: Double, dt: Double) extends SimulationStra
     var t = 0.0
     // Add to result vector
     m += (t -> model.stateVector.dupl)
-    if (debug) println(printStates(t, model.stateVector, 6))
+    if (logger.isDebugEnabled) logger.debug(printStates(t, model.stateVector, 6))
 
     while (t < maxTime) {
       // println("tNext: " + tNext.mkString("[ ", ", ", " ]"))
@@ -80,7 +81,7 @@ class IndepTimeScaleStrategy(maxTime: Double, dt: Double) extends SimulationStra
         tNext(i) = tCurr(i) + pDt(i)
         // Add to result vector
         //m += (t -> model.stateVector.dupl)
-        //if (debug) println(printStates(t, model.stateVector, 6))
+        //if (logger.isDebugEnabled) logger.debug(printStates(t, model.stateVector, 6))
         t = tCurr.min
         changes = changes.filter(c => c.tEnd > t)
       }

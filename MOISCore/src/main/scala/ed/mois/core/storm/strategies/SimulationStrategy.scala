@@ -10,6 +10,8 @@ import scala.collection.immutable.TreeMap
 import scala.concurrent._
 import ExecutionContext.Implicits.global
 
+import grizzled.slf4j.Logger
+
 import ed.mois.core.storm._
 import ed.mois.core.storm.comm._
 
@@ -21,7 +23,7 @@ import ed.mois.core.storm.comm._
  */
 abstract class SimulationStrategy extends Actor {
   // Debug variable that can be overwritten and allows debugging output
-  val debug = false
+  val logger = Logger[this.type]
 
   /**
    * Main routine that simulates an environment.

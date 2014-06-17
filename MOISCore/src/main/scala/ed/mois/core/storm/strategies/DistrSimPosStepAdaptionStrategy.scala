@@ -48,7 +48,7 @@ class DistrSimPosStepAdaptionStrategy(val model: StormModel, maxTime: Double, dt
   // Enter first value
   m += (0.0 -> model.stateVector.dupl)
   // Print header in console
-  if (debug) println(printStatesHeader(model.stateVector, 6))
+  if (logger.isDebugEnabled) logger.debug(printStatesHeader(model.stateVector, 6))
 
   // Smallest consistent state time
   var t = 0.0
@@ -83,7 +83,7 @@ class DistrSimPosStepAdaptionStrategy(val model: StormModel, maxTime: Double, dt
         changes = chgs ::: changes
 
         // Some debug message that prints the state variables
-        if (debug) println(s"Process $i: " + printStates(t, m(tCurr(i)), 6))
+        if (logger.isDebugEnabled) logger.debug(s"Process $i: " + printStates(t, m(tCurr(i)), 6))
         model.calcDependencies(m(tCurr(i)))
 
         val dupl = m(tCurr(i)).dupl
@@ -94,7 +94,7 @@ class DistrSimPosStepAdaptionStrategy(val model: StormModel, maxTime: Double, dt
           tNext(i) = tCurr(i) + pDt(i)
           // Adjust all other processes' time step. Get ids first
           val violProcIds = violators.get._3.map(_.origin).distinct.filter(_ != i)
-          if (debug) println("Violating! Mainly " + violProcIds.mkString("(", ", ", ")") + " plus i=" + i)
+          if (logger.isDebugEnabled) logger.debug("Violating! Mainly " + violProcIds.mkString("(", ", ", ")") + " plus i=" + i)
           // And adjust all dt's, tCurr's, ...
           // First remove all currently running process instances (as the current one is 
           // more important - TODO: this might not hold in general!!)
@@ -132,7 +132,7 @@ class DistrSimPosStepAdaptionStrategy(val model: StormModel, maxTime: Double, dt
           //println(s"${pDt(i)}, ${tPrev(i)}, ${tCurr(i)}, ${tNext(i)}")
           // Add to result vector
           //m += (t -> model.stateVector.dupl)
-          //if (debug) println(printStates(t, model.stateVector, 6))
+          //if (logger.isDebugEnabled) logger.debug(printStates(t, model.stateVector, 6))
 
           // Get ids of smallest processes and set them off if they haven't already started
           val minCurrT = tCurr.min

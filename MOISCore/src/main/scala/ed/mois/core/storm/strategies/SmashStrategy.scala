@@ -33,7 +33,7 @@ class SmashStrategy(maxTime: Double, dt: Double) extends SimulationStrategy with
     val processes = model.processes.map(p => p())
     // Initialize result map
     val m = collection.mutable.Map.empty[Double, StormState[_]]
-    if (debug) println(printStatesHeader(model.stateVector, 6))
+    if (logger.isDebugEnabled) logger.debug(printStatesHeader(model.stateVector, 6))
     
     // Step through whole simulation
     for (t <- 0 to (maxTime / dt).toInt) {
@@ -42,7 +42,7 @@ class SmashStrategy(maxTime: Double, dt: Double) extends SimulationStrategy with
       model.calcDependencies(model.stateVector)
       // Add to result vector
       m += (time -> model.stateVector.dupl)
-      if (debug) println(printStates(t.toDouble * dt, model.stateVector, 6))
+      if (logger.isDebugEnabled) logger.debug(printStates(t.toDouble * dt, model.stateVector, 6))
       // Step forward in time
       val results = processes.map(_._evolve(model.stateVector.dupl, time, dt))
       // Merge all fields

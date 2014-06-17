@@ -14,13 +14,14 @@ import scala.concurrent.duration._
 
 import ed.mois.core.storm.strategies._
 import ed.mois.core.storm._
-
+import ed.mois.core.util.Log
+ 
 object BrineTankCascadeSimRunner extends App {
+  Log setup
   val sim = new StormSim {
-    //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01) {override val debug = true}
+    //override val simulationStrategy = () => new SynchronizationPointsStrategy(50.0, 0.01)
     val model = new BrineTankCascadeModel
     override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 50.0, 0.1) 
-      {override val debug = false}
   }
 
   val results = sim.runSim

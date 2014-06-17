@@ -17,19 +17,19 @@ import scala.collection.immutable.TreeMap
 import ed.mois.core.storm._
 import ed.mois.core.storm.strategies._
 import ed.mois.core.util.plot.s4gnuplot.Gnuplot
+import ed.mois.core.util.Log
 
 /**
  * The runner is just an object that contains a main method that runs the model. 
  */
 object ResourceProcessingSystemRunner extends App {
+  Log setup
   // Define a new simulator (we use the storm simulator here)
   val sim = new StormSim {
     // Specify the model, in this case the bollenbach model defined below
     val model = new ResourceProcessingModel(0.5)
     // Override the default simulation strategy to use a smash strategy with debug output
-    override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 8.0, 0.01) {
-      override val debug = false
-    }
+    override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 8.0, 0.01)
   }
 
   // Run the simulation and store the results

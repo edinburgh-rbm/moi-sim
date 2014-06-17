@@ -15,13 +15,15 @@ import scala.util.{Success, Failure}
 import ed.mois.core.storm.StormSim 
 import ed.mois.core.storm.strategies.IndepTimeScaleStrategy
 import ed.mois.models.storm.SampleODEModel
+import ed.mois.core.util.Log
 
 import org.scalatest._
 
 class SampleODEModelTest extends FlatSpec {
   "Sample ODE Model" should "run" in {
+    Log setup
     val sim = new StormSim {
-      override val simulationStrategy = () => new IndepTimeScaleStrategy(50.0, 0.05) {override val debug = false}
+      override val simulationStrategy = () => new IndepTimeScaleStrategy(50.0, 0.05)
       val model = new SampleODEModel
       override val writeData = false
     }

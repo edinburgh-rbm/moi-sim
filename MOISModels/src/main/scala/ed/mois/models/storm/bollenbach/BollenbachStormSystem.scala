@@ -15,14 +15,16 @@ import scala.collection.immutable.TreeMap
 
 import ed.mois.core.storm._
 import ed.mois.core.storm.strategies._
+import ed.mois.core.util.Log
 import ed.mois.core.util.plot.s4gnuplot.Gnuplot
 
 object BollenbachSystemRunner extends App {
+  Log setup
   var g_max = 0.0
   var sr_max = 0.0
   for (i <- 9000 to 10000) {
     val sim = new StormSim {
-      override val simulationStrategy = () => new SmashStrategy(16.0, 0.01) {override val debug = false}
+      override val simulationStrategy = () => new SmashStrategy(16.0, 0.01)
       val model = new BollenbachModel(i)
       override val printGnu = false
     }
@@ -39,7 +41,7 @@ object BollenbachSystemRunner extends App {
   println(s"g_max: $g_max, sr_max: $sr_max")
 
   val sim = new StormSim {
-    override val simulationStrategy = () => new SmashStrategy(16.0, 0.01) {override val debug = false}
+    override val simulationStrategy = () => new SmashStrategy(16.0, 0.01)
     val model = new BollenbachModel(sr_max)
   }
 

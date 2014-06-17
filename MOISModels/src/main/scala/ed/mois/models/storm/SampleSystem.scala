@@ -15,14 +15,14 @@ import scala.concurrent.duration._
 import ed.mois.core.storm.strategies._
 import ed.mois.core.storm.adapter._
 import ed.mois.core.storm._
+import ed.mois.core.util.Log
 
 object SampleSimRunner extends App {
+  Log setup
   val sim = new StormSim {
     val model = new SampleModel
     // Override the default simulation strategy to use a smash strategy with debug output
-    override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 50.0, 1.0) {
-      override val debug = false
-    }
+    override val simulationStrategy = () => new DistrSimPosStepAdaptionStrategy(model, 50.0, 1.0)
   }
 
   sim.system.shutdown

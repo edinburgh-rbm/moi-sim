@@ -7,8 +7,10 @@ import scala.concurrent.duration._
 
 import ed.mois.core.storm.strategies._
 import ed.mois.core.storm._
-
+import ed.mois.core.util.Log
+ 
 object KarrlikeSimRunner extends App {
+  Log setup
   val sim = new StormSim {
     val model = new KarrlikeModel
     // Override the default simulation strategy to use a smash strategy with debug output
@@ -16,9 +18,7 @@ object KarrlikeSimRunner extends App {
     //override val simulationStrategy = () => new SynchronizationPointsStrategy(30.0, 1.0) {
     //override val simulationStrategy = () => new IndepTimeScaleStrategy(30.0, 1.0) {
     //override val simulationStrategy = () => new SmashStrategy(30.0, 1.0) {
-    override val simulationStrategy = () => new KarrStrategy(30.0, 1.0) {
-      override val debug = false
-    }
+    override val simulationStrategy = () => new KarrStrategy(30.0, 1.0)
   }
 
   val results = sim.runSim

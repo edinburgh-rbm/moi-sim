@@ -14,10 +14,12 @@ import scala.concurrent.duration._
 
 import ed.mois.core.storm.strategies._
 import ed.mois.core.storm._
+import ed.mois.core.util.Log
 
 object SampleODESimRunner extends App {
+  Log setup
   val sim = new StormSim {
-    override val simulationStrategy = () => new IndepTimeScaleStrategy(50.0, 0.05) {override val debug = false}
+    override val simulationStrategy = () => new IndepTimeScaleStrategy(50.0, 0.05)
     val model = new SampleODEModel
     override val fileName = "sampleODE.dat"
   }

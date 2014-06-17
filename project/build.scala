@@ -64,9 +64,8 @@ object MyBuild extends Build {
     file("MOISModels"),
     settings = buildSettings ++ Seq(
       libraryDependencies ++= Seq(
-	"org.scalatest" % "scalatest_2.10" % "2.2.0" % "test",
-	"org.slf4j" % "slf4j-api" % "1.7.7",
-	"org.slf4j" % "slf4j-simple" % "1.7.7")
+	"org.scalatest" % "scalatest_2.10" % "2.2.0" % "test"
+      )
     )
   ) dependsOn(MOISCore)
   
@@ -83,13 +82,13 @@ object MyBuild extends Build {
 	// Matrices in Java
 	"com.googlecode.efficient-java-matrix-library" % "ejml" % "0.22",
 	"org.slf4j" % "slf4j-api" % "1.7.7",
-	"org.slf4j" % "slf4j-simple" % "1.7.7",
+	"org.slf4j" % "slf4j-log4j12" % "1.7.7",
 	"org.clapper" %% "grizzled-slf4j" % "1.0.1",
+	"log4j" % "log4j" % "1.2.17",
 	"org.scalatest" % "scalatest_2.10" % "2.2.0" % "test",
 	"commons-logging" % "commons-logging" % "1.1.3",
 	"org.apache.commons" % "commons-math" % "2.2",
-	"org.apache.commons" % "commons-lang3" % "3.1",
-	"log4j" % "log4j" % "1.2.17")
+	"org.apache.commons" % "commons-lang3" % "3.1")
     )
   ) dependsOn(MOISmacros, MOISKnowledgeBase)
 
