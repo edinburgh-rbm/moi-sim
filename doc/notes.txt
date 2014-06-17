@@ -1,5 +1,9 @@
 -*- org -*-
 
+* General
+  - Excessive use of import foo.bar._. Importing everything from a
+    package means that it's a pain to find out where a particular
+    symbol is defined.
 * Stormtest.scala
 
   - The slices method is neat and breaks up values of the form (t, dt,

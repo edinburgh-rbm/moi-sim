@@ -1,25 +1,47 @@
 /*
+ * StormSim.scala
+ *
+ * This file contains the main entry point into the simulation machinery.
+ * To use it in the simplest way, instantiate like this
+ *
+ *     val sim = new StormSim {
+ *       val model = new SomeSortOfModel
+ *     }
+ *     val results = sim.runSim
+ *     Await.result(results, 60 seconds)
+ *     results onComplete {
+ *       case Success(data) => {
+ *         ... do something ...
+ *       }
+ *       case Failure(t) => {
+ *         ... do something else ...
+ *       }
+ *     }
+ *
  * Authors: 
  * - Dominik Bucher, ETH Zurich, Github: dominikbucher
  */
 
 package ed.mois.core.storm
 
-import akka.actor._
+import akka.actor.{ActorSystem, Props}
 import akka.pattern.ask
 import akka.util.Timeout
 
 import scala.collection.immutable.TreeMap
-import scala.concurrent._
+
+// used for futures
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
+// used for timeout
 import scala.concurrent.duration._
-import ExecutionContext.Implicits.global
 
 import grizzled.slf4j.Logger
 
-import ed.mois.core.storm.strategies._
-import ed.mois.core.util._
+import ed.mois.core.storm.comm.RunSimulation
+import ed.mois.core.storm.strategies.{SimulationStrategy, SmashStrategy}
+import ed.mois.core.util.DataToFileWriter
 import ed.mois.core.util.plot.s4gnuplot.Gnuplot
-import ed.mois.core.storm.comm._
 
 /**
  * Defines the outline of a Storm simulator. This class can be extended and filled in 
@@ -45,7 +67,7 @@ abstract class StormSim {
   /**
    * Tells the simulator if gnu plot should be called in the end to plot observables. 
    */
-  val printGnu = false
+  val printGnu = true
 
   /** 
    * Tells the simulator if data should be written to disk.
