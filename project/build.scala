@@ -84,6 +84,7 @@ object MyBuild extends Build {
 	"com.googlecode.efficient-java-matrix-library" % "ejml" % "0.22",
 	"org.slf4j" % "slf4j-api" % "1.7.7",
 	"org.slf4j" % "slf4j-simple" % "1.7.7",
+	"org.clapper" %% "grizzled-slf4j" % "1.0.1",
 	"org.scalatest" % "scalatest_2.10" % "2.2.0" % "test",
 	"commons-logging" % "commons-logging" % "1.1.3",
 	"org.apache.commons" % "commons-math" % "2.2",

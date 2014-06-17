@@ -14,7 +14,7 @@ import scala.concurrent._
 import scala.concurrent.duration._
 import ExecutionContext.Implicits.global
 
-import org.slf4j.LoggerFactory
+import grizzled.slf4j.Logger
 
 import ed.mois.core.storm.strategies._
 import ed.mois.core.util._
@@ -68,14 +68,14 @@ abstract class StormSim {
   // Implicit timeout for dealing with actors and waiting for their results
   implicit val timeout = Timeout(360 seconds)
 
+  val logger = Logger[this.type]
+
   /**
    * Main function that runs a simulation given the model and strategies.
    */
   def runSim: Future[TreeMap[Double, StormState[_]]] = {
-    val log = LoggerFactory.getLogger(classOf[StormSim])
-
     val initTime = System.currentTimeMillis
-    log.info(s"""Running simulation '${model.title}'""")
+    logger.info(s"""Running simulation '${model.title}'""")
 
     // Create a future holding the simulation results
     val results: Future[TreeMap[Double, StormState[_]]] = {
@@ -88,18 +88,18 @@ abstract class StormSim {
       case endSim => {
         // Statistics
         val time = System.currentTimeMillis - initTime
-        log.info(s"""Simulation '${model.title}' took ${time.toDouble / 1000} seconds and resulted in ${endSim.size} data vectors of size ${endSim.head._2.fields.size}.""")
+        logger.info(s"""Simulation '${model.title}' took ${time.toDouble / 1000} seconds and resulted in ${endSim.size} data vectors of size ${endSim.head._2.fields.size}.""")
 
         // Logging
         if (!endSim.isEmpty && writeData) {
-	  log.info(s"""Writing simulation data to ${fileName}""")
+	  logger.info(s"""Writing simulation data to ${fileName}""")
           loggingStrategy.writeStormData(fileName, model, endSim)
         }
 
         // Observables
         val observables = model.observables
         if (!observables.isEmpty && printGnu) {
-          log.info("""Plotting data""")
+          logger.info("""Plotting data""")
 
           val gnuData = endSim.map(es => Seq(es._1) ++
             observables.map(o => es._2.fields(o.id).asInstanceOf[Double])).toSeq
@@ -117,12 +117,12 @@ abstract class StormSim {
           plot.plot
         }
 
-	log.info("""Done. Shutting down Actors.""")
+	logger.info("""Done. Shutting down Actors.""")
 
         // Shut down system (in case it was even used...)
         system.shutdown
 
-	log.info("""Actors shut down.""")
+	logger.info("""Actors shut down.""")
       }
 
     }
