@@ -47,10 +47,10 @@ class RecycledBrineTankCascadeModel extends StormModel {
   val contributors = "Dominik Bucher"
 
   lazy val stateVector = RecycledBrineTankCascadeState()
-  ++(() => new P1)
-  ++(() => new P2)
-  ++(() => new P3)
-  ++(() => new Recycler)
+  this addProcess(() => new P1)
+  this addProcess(() => new P2)
+  this addProcess(() => new P3)
+  this addProcess(() => new Recycler)
 
   import stateVector._
   override val observables = List(x1, x2, x3)

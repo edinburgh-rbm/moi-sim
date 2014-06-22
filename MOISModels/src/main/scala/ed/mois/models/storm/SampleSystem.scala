@@ -58,16 +58,16 @@ class SampleModel extends StormModel {
   val contributors = "Dominik Bucher"
 
   lazy val stateVector = SampleState()
-  //++(() => new MatlabP)
+  //this addProcess(() => new MatlabP)
   val mp = new MatlabP
   mp.test
   mp.disconnect
-  // ++(() => new P1)
-  // ++(() => new P2)
-  // ++(() => new P3)
-  // ++(() => new P4)
-  // ++(() => new P5)
-  // ++(() => new P6)
+  // this addProcess(() => new P1)
+  // this addProcess(() => new P2)
+  // this addProcess(() => new P3)
+  // this addProcess(() => new P4)
+  // this addProcess(() => new P5)
+  // this addProcess(() => new P6)
 
   /*lazy val processes = Array(
     () => new P1, 

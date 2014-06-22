@@ -39,7 +39,7 @@ abstract class StormModel {
   /**
    * Shortcut to add process.
    */
-  def ++(creator: () => StormProcess[StateType]) = addProcess(creator)
+  //def ++(creator: () => StormProcess[StateType]) = addProcess(creator)
 
   /**
    * List of observables, is graphed right after simulation stops.

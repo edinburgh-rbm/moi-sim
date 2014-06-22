@@ -97,9 +97,9 @@ class ResourceProcessingModel(iSr: Double) extends StormModel {
   // "() => new Process" as this specifies a creator function that is able
   // to instantiate new processes on the fly. This is because processes
   // run many times in a distributed manner
-  ++(() => new Metabolism)
-  ++(() => new ResourceDispProc)
-  ++(() => new ResourceDispProtTranslation)
+  this addProcess(() => new Metabolism)
+  this addProcess(() => new ResourceDispProc)
+  this addProcess(() => new ResourceDispProtTranslation)
   /*lazy val processes: Array[() => StormProcess[ResourceProcessingState]] = Array(
     // It is a little inconvenient having to write () => ... {override val id = ...}
     // Maybe write a macro that allows to just write new Metabolism

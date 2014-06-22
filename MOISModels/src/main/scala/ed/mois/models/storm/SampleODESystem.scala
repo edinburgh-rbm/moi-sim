@@ -48,8 +48,8 @@ class SampleODEModel extends StormModel {
   val contributors = "Dominik Bucher"
 
   lazy val stateVector = SampleODEState()
-  ++(() => new P1)
-  ++(() => new P2)
+  this addProcess(() => new P1)
+  this addProcess(() => new P2)
 
   import stateVector._
   override val observables = List(x1, x2)
