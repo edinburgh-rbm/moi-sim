@@ -17,6 +17,15 @@ class ProcessTest extends FlatSpec {
     }
   }
 
+  object q extends Process("q") {
+    val x1 = param(1000.0)
+    val privatething = 3
+    def step(t: Double, dt: Double) {
+    }
+  }
+
+//  runSim(<iv>,  p, q, r)
+
   "something" should "succeed" in {
     println(s"$p")
     val dx = p._step(0, 0)
