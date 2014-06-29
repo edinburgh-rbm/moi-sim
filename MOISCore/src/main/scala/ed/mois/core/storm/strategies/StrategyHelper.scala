@@ -22,7 +22,8 @@ trait StrategyHelper {
    * @return The formatted state names.
    */
   def printStatesHeader(states: StormState[_], maxChars: Int): String = {
-    val stateStr = states.fields.map { s =>
+    val stateList = states.fields.toList.sortWith((x,y) => x._1 < y._1)
+    val stateStr = stateList.map { s =>
       val str = states.fieldNames(s._1).toString
       str.substring(0, math.min(str.length(), maxChars))
     }
@@ -39,7 +40,8 @@ trait StrategyHelper {
    * @return The formatted states.
    */
   def printStates(time: Double, states: StormState[_], maxChars: Int): String = {
-    val stateStr = states.fields.map { s =>
+    val stateList = states.fields.toList.sortWith((x,y) => x._1 < y._1)
+    val stateStr = stateList.map { s =>
       val str = s._2.toString
       str.substring(0, math.min(str.length(), maxChars))
     }

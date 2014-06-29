@@ -88,7 +88,9 @@ object MyBuild extends Build {
 	"org.scalatest" % "scalatest_2.10" % "2.2.0" % "test",
 	"commons-logging" % "commons-logging" % "1.1.3",
 	"org.apache.commons" % "commons-math" % "2.2",
-	"org.apache.commons" % "commons-lang3" % "3.1")
+	"org.apache.commons" % "commons-lang3" % "3.1",
+	"uk.ac.ed.inf" %% "mois" % "1.99.1-SNAPSHOT"
+      )
     )
   ) dependsOn(MOISmacros, MOISKnowledgeBase)
 

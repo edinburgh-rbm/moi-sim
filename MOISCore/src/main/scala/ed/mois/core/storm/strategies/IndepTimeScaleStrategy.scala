@@ -49,8 +49,10 @@ class IndepTimeScaleStrategy(maxTime: Double, dt: Double) extends SimulationStra
       //println(s"Calculated i: $i")
       // Let this one process produce its change
       val change = processes(i)._evolve(m(tCurr(i)).dupl, tCurr(i), pDt(i))
+      //logger.debug(s"running process $i")
       // Zip all the results and check for violations
       changes = change ::: changes
+      //logger.debug(s"changes from process $i: $changes")
       val dupl = m(tCurr(i)).dupl
       val violators = intersect(dupl, dupl.fieldPtrs, changes, t, pDt(i))
       if (violators.isDefined) {
@@ -73,6 +75,7 @@ class IndepTimeScaleStrategy(maxTime: Double, dt: Double) extends SimulationStra
         //m.foreach(x => println(printStates(x._1, x._2, 6)))
         //println(s"Trying to merge: ${tCurr(i)} -> ${tNext(i) - tCurr(i)}")
         m = merge(m, changes, tCurr(i), tNext(i) - tCurr(i))
+	//logger.debug(s"result of process $i ${m(tCurr(i)).fields}")
         // Adjust i's times and the global time
         // Try to put pDt(i) back to original dt
         pDt(i) = math.min(pDt(i) * 2.0, dt)
